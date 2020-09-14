@@ -7,9 +7,10 @@ function RefineByBrand(props) {
     valueIdType,
     valueByBrand,
     handleByBrand,
+    countProducts,
   } = props;
 
-  const onChange = (brand) => {
+  const handleCheck = (brand) => {
     const newChecked = [...valueByBrand];
 
     const currentType = newChecked.indexOf(brand);
@@ -38,9 +39,17 @@ function RefineByBrand(props) {
                       type="checkbox"
                       id={e.id}
                       checked={valueByBrand.includes(e.brand) ? true : false}
-                      onChange={() => onChange(e.brand)}
+                      onChange={() => handleCheck(e.brand)}
                     />
-                    <label htmlFor={e.id}>{e.brand}</label>
+                    <label htmlFor={e.id}>
+                      {e.brand} (
+                      {
+                        countProducts.filter(
+                          (product) => product.brand === e.brand
+                        ).length
+                      }
+                      )
+                    </label>
                   </li>
                 ))
               )

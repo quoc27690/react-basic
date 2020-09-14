@@ -12,15 +12,19 @@ function Main(props) {
     valueByRatings,
     valueByPricesStart,
     valueByPricesEnd,
+    handleProducts,
+    valueSearch,
   } = props;
 
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(4);
 
+  const [sort, setSort] = useState("");
+
   useEffect(() => {
     let xhttp = new XMLHttpRequest();
-    let url = "http://localhost:4000/products?";
+    let url = `http://localhost:4000/products?`;
 
     if (valueTitle) {
       url += `&title=${valueTitle}`;
@@ -59,6 +63,14 @@ function Main(props) {
       url += `&price_lte=${valueByPricesEnd}`;
     }
 
+    if (sort) {
+      url += `&_sort=price&_order=${sort}`;
+    }
+
+    if (valueSearch) {
+      url += `&q=${valueSearch}`;
+    }
+
     xhttp.open("GET", url, true);
     xhttp.send();
     xhttp.onreadystatechange = () => {
@@ -74,7 +86,13 @@ function Main(props) {
     valueByRatings,
     valueByPricesStart,
     valueByPricesEnd,
+    sort,
+    valueSearch,
   ]);
+
+  useEffect(() => {
+    handleProducts(products);
+  }, [products]);
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -87,9 +105,13 @@ function Main(props) {
     setCurrentPage(pageNumber);
   };
 
+  const handleSort = (value) => {
+    setSort(value);
+  };
+
   return (
     <div className="main">
-      <ResultTop />
+      <ResultTop products={products} handleSort={handleSort} />
       <Products currentProducts={currentProducts} />
       <Pagination
         currentPage={currentPage}

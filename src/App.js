@@ -12,6 +12,8 @@ function App() {
   const [valueByRatings, setValueByRatings] = useState("");
   const [valueByPricesStart, setValueByPricesStart] = useState("");
   const [valueByPricesEnd, setValueByPricesEnd] = useState("");
+  const [countProducts, setCountProducts] = useState("");
+  const [valueSearch, setValueSearch] = useState("");
 
   const handleTitle = (title) => {
     setValueTitle(title);
@@ -48,9 +50,17 @@ function App() {
     setValueByPricesEnd("");
   };
 
+  const handleProducts = (products) => {
+    setCountProducts(products);
+  };
+
+  const handleSearch = (value) => {
+    setValueSearch(value);
+  };
+
   return (
     <div>
-      <Header />
+      <Header handleSearch={handleSearch} />
       <div>
         <Menu
           handleTitle={handleTitle}
@@ -67,6 +77,7 @@ function App() {
           valueByType={valueByType}
           valueTitle={valueTitle}
           valueType={valueType}
+          countProducts={countProducts}
         />
         <Main
           valueTitle={valueTitle}
@@ -76,6 +87,8 @@ function App() {
           valueByRatings={valueByRatings}
           valueByPricesStart={valueByPricesStart}
           valueByPricesEnd={valueByPricesEnd}
+          handleProducts={handleProducts}
+          valueSearch={valueSearch}
         />
       </div>
     </div>

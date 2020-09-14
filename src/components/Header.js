@@ -1,6 +1,8 @@
 import React from "react";
 
 function Header(props) {
+  const { handleSearch } = props;
+
   return (
     <header>
       <a href="./" className="header__logo">
@@ -13,7 +15,10 @@ function Header(props) {
         amazing
       </a>
       <div className="header__input">
-        <input placeholder="Search a product" />
+        <input
+          placeholder="Search a product"
+          onChange={(value) => handleSearch(value.target.value)}
+        />
         <button>
           <i className="fa fa-search"></i>
         </button>

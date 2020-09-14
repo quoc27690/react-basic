@@ -1,7 +1,13 @@
 import React from "react";
 
 function RefineByType(props) {
-  const { types, valueIdTitle, valueByType, handleByType } = props;
+  const {
+    types,
+    valueIdTitle,
+    valueByType,
+    handleByType,
+    countProducts,
+  } = props;
 
   const onChange = (type) => {
     const newChecked = [...valueByType];
@@ -30,7 +36,14 @@ function RefineByType(props) {
                   checked={valueByType.includes(e.type) ? true : false}
                   onChange={() => onChange(e.type)}
                 />
-                <label htmlFor={e.id}>{e.type}</label>
+                <label htmlFor={e.id}>
+                  {e.type} (
+                  {
+                    countProducts.filter((product) => product.type === e.type)
+                      .length
+                  }
+                  )
+                </label>
               </li>
             ))
           )}

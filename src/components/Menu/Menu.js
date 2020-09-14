@@ -21,6 +21,7 @@ function Menu(props) {
     valueTitle,
     valueType,
     handleClearAllFilter,
+    countProducts,
   } = props;
 
   const [types, setTypes] = useState([]);
@@ -88,6 +89,7 @@ function Menu(props) {
           valueIdTitle={valueIdTitle}
           valueByType={valueByType}
           handleByType={handleByType}
+          countProducts={countProducts}
         />
         <p className="menu__title-2">Brand</p>
         <RefineByBrand
@@ -96,6 +98,7 @@ function Menu(props) {
           valueIdType={valueIdType}
           valueByBrand={valueByBrand}
           handleByBrand={handleByBrand}
+          countProducts={countProducts}
         />
         <p className="menu__title-2">Ratings</p>
         <RefineByRatings

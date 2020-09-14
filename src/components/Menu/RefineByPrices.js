@@ -18,7 +18,7 @@ function RefineByPrices(props) {
     itemPrices.push(item);
   }
 
-  const onClick = (start, end, id) => {
+  const onClick = (start, end) => {
     handleByPrices(start, end);
   };
 
