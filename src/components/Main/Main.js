@@ -23,7 +23,6 @@ function Main(props) {
   const [sort, setSort] = useState("");
 
   useEffect(() => {
-    let xhttp = new XMLHttpRequest();
     let url = `http://localhost:4000/products?`;
 
     if (valueTitle) {
@@ -71,13 +70,11 @@ function Main(props) {
       url += `&q=${valueSearch}`;
     }
 
-    xhttp.open("GET", url, true);
-    xhttp.send();
-    xhttp.onreadystatechange = () => {
-      if (xhttp.readyState === 4 && xhttp.status === 200) {
-        setProducts(JSON.parse(xhttp.responseText));
-      }
-    };
+    fetch(url)
+      .then((res) => res.json())
+      .then((result) => {
+        setProducts(result);
+      });
   }, [
     valueTitle,
     valueType,

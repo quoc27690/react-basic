@@ -30,15 +30,12 @@ function Menu(props) {
   const [valueIdType, setvalueIdType] = useState("");
 
   useEffect(() => {
-    let xhttp = new XMLHttpRequest();
     let url = "http://localhost:4000/types";
-    xhttp.open("GET", url, true);
-    xhttp.send();
-    xhttp.onreadystatechange = () => {
-      if (xhttp.readyState === 4 && xhttp.status === 200) {
-        setTypes(JSON.parse(xhttp.responseText));
-      }
-    };
+    fetch(url)
+      .then((res) => res.json())
+      .then((result) => {
+        setTypes(result);
+      });
   }, []);
 
   const handleIdTitle = (id) => {
